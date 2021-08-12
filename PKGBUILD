@@ -14,13 +14,13 @@ license=("BSD")
 depends=("gtk3" "libxss" "nss" "python-psutil" "xorg-server-xvfb" "xorg-setxkbmap" "xorg-xauth" "xorg-xdpyinfo" "xorg-xrandr")
 install="${pkgname}.install"
 source=(
-  "${pkgname}-${pkgver}.deb::https://dl.google.com/linux/${pkgname}/deb/pool/main/${pkgname:0:1}/${pkgname}/${pkgname}_${pkgver}_amd64.deb"
+  "${pkgname}-${pkgver}.deb::https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb"
   "${pkgname}.service"
   "pamrule"
   "crd"
 )
 sha256sums=(
-  "c2ceac80133870d34785a149e1cd0f2a6644da04bbf2416a6b0ab9d1b5ba2faf"
+  "3b01306bff19cd9ccddf61bbd636b0a82aa394b25b8da8349b53c81bf825a498"
   "e5da5ae89b5bc599f72f415d1523341b25357931b0de46159fce50ab83615a4b"
   "fcc38269eb1cc902abff9688eda9377a22367e39b9f111f87c0dd8e77adb82e2"
   "27dee2d383e6bd993fe0557d5c222fa80ab6d16d43775dedff6218713c7a1c06"
