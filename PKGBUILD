@@ -5,7 +5,7 @@
 # Contributor: Mateus Rodrigues Costa <charles [dot] costar [at] gmail [dot] com>
 
 pkgname=chrome-remote-desktop
-pkgver=103.0.5060.46
+pkgver="current"
 pkgrel=1
 pkgdesc="Access other computers or allow another user to access your computer securely over the Internet"
 arch=("x86_64")
@@ -14,17 +14,15 @@ license=("BSD")
 depends=("gtk3" "libutempter" "libxss" "nss" "python-psutil" "xorg-server-xvfb" "xorg-setxkbmap" "xorg-xauth" "xorg-xdpyinfo" "xorg-xrandr")
 install="${pkgname}.install"
 source=(
-  "${pkgname}-${pkgver}.deb::https://dl.google.com/linux/${pkgname}/deb/pool/main/${pkgname:0:1}/${pkgname}/${pkgname}_${pkgver}_amd64.deb"
+  "${pkgname}-${pkgver}.deb::https://dl.google.com/linux/direct/${pkgname}_${pkgver}_amd64.deb"
   "${pkgname}.service"
   "pamrule"
   "crd"
 )
-sha256sums=(
-  "7106045c156f6d733ce064c4e928c9032f06245591f59f830a9ad4cce9b39730"
-  "e5da5ae89b5bc599f72f415d1523341b25357931b0de46159fce50ab83615a4b"
-  "fcc38269eb1cc902abff9688eda9377a22367e39b9f111f87c0dd8e77adb82e2"
-  "021110f49d465294517eec92eeb24ebca41e264ef33cbdda78732add1f269d02"
-)
+sha256sums=('9e964b78f392cbeb540598435a99159cda5d4d0e56466003d7e9d7b05566e773'
+            'e5da5ae89b5bc599f72f415d1523341b25357931b0de46159fce50ab83615a4b'
+            'fcc38269eb1cc902abff9688eda9377a22367e39b9f111f87c0dd8e77adb82e2'
+            '021110f49d465294517eec92eeb24ebca41e264ef33cbdda78732add1f269d02')
 
 # curl -qs https://dl.google.com/linux/chrome-remote-desktop/deb/dists/stable/main/binary-amd64/Packages | grep "^Version\|^SHA256" | awk '{print $2}'
 
@@ -52,6 +50,8 @@ package() {
   install -Dm644 "${srcdir}/pamrule" "${pkgdir}/etc/pam.d/${pkgname}"
   install -Dm755 "${srcdir}/crd" "${pkgdir}/usr/bin/crd"
   install -dm755 "${pkgdir}/etc/chromium/native-messaging-hosts"
+  install -Dm644 "${srcdir}/lib/systemd/system/${pkgname}@.service" "${pkgdir}/usr/lib/systemd/system/${pkgname}@.service"
+
   
   for _file in $(find "${pkgdir}/etc/opt/chrome/native-messaging-hosts" -type f); do
     local _filename=$(basename ${_file})
